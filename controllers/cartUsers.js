@@ -21,6 +21,34 @@ export const createCart = async (req, res) => {
     res.status(500).json({ error: "Tạo giỏ hàng thất bại" });
   }
 };
+export const updateCart = async (req, res) => {
+  try {
+    const newCart = req.body;
+    const checkCart = await cartUserModel.findOne({
+      username: newCart.username,
+      masp: newCart.masp,
+    });
+    if (checkCart) {
+      await cartUserModel.updateOne(
+        {
+          username: newCart.username,
+          masp: newCart.masp,
+        },
+        {
+          $set: {
+            quantity: newCart.quantity,
+            totalPrice: newCart.totalPrice,
+          },
+        }
+      );
+      res.json({ mess: "success" });
+    } else {
+      res.status(404).json({ err: "Not found" });
+    }
+  } catch (err) {
+    res.status(500).json({ error: "update giỏ hàng thất bại" });
+  }
+};
 export const getCart = async (req, res) => {
   try {
     const username = req.params.username;
@@ -37,6 +65,18 @@ export const getCart = async (req, res) => {
     res.status(500).json({ error: "Lấy giỏ hàng thất bại" });
     // console.log("err");
     // console.log(res.status);
+  }
+};
+export const deleteCart = async (req, res) => {
+  try {
+    const newCart = req.body;
+    const checkCart = await cartUserModel.deleteOne({
+      username: newCart.username,
+      masp: newCart.masp,
+    });
+    res.json({ mess: "success" });
+  } catch (err) {
+    res.status(500).json({ error: "xóa giỏ hàng thất bại" });
   }
 };
 const updateCart = async (cart) => {

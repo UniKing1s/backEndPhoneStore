@@ -2,7 +2,7 @@ import mongoose from "mongoose";
 const schema = new mongoose.Schema(
   {
     maHoaDon: {
-      type: String,
+      type: Number,
       required: true,
     },
     username: {

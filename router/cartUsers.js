@@ -1,5 +1,10 @@
 import express from "express";
-import { createCart, getCart } from "../controllers/cartUsers.js";
+import {
+  createCart,
+  deleteCart,
+  getCart,
+  updateCart,
+} from "../controllers/cartUsers.js";
 
 const router = express.Router();
 
@@ -9,4 +14,6 @@ const router = express.Router();
 
 router.post("/", createCart);
 router.get("/:username", getCart);
+router.post("/updateCart/", updateCart);
+router.delete("/", deleteCart);
 export default router;
