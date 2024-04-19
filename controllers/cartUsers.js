@@ -7,11 +7,12 @@ export const createCart = async (req, res) => {
       username: newCart.username,
     });
     if (checkCart) {
-      updateCart(newCart);
+      const carts = updateCart(newCart);
+      res.json(carts);
     } else {
       const cart = new cartUserModel(newCart);
       await cart.save();
-      res.json({ message: "success" });
+      res.json(cart);
       console.log("cart", cart);
     }
   } catch (err) {
@@ -49,4 +50,8 @@ updateCart = async (newCart) => {
       },
     }
   );
+  const cartUser = cartUserModel.findOne({
+    username: newCart.username,
+  });
+  return cartUser;
 };
