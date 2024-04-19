@@ -5,8 +5,32 @@ const schema = new mongoose.Schema(
       type: String,
       required: true,
     },
-    cart: {
-      type: Object,
+    masp: {
+      type: Number,
+      required: true,
+    },
+    name: {
+      type: String,
+      required: true,
+    },
+    quantity: {
+      type: Number,
+      required: true,
+    },
+    price: {
+      type: Number,
+      required: true,
+    },
+    sale: {
+      type: Number,
+      required: true,
+    },
+    totalPrice: {
+      type: Number,
+      required: true,
+    },
+    img: {
+      type: String,
       required: true,
     },
   },
