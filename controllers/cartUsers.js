@@ -7,7 +7,7 @@ export const createCart = async (req, res) => {
       username: newCart.username,
     });
     if (checkCart) {
-      const carts = updateCart(newCart);
+      const carts = updateCart(newCart, checkCart);
       res.json(carts);
     } else {
       const cart = new cartUserModel(newCart);
@@ -39,14 +39,21 @@ export const getCart = async (req, res) => {
     // console.log(res.status);
   }
 };
-const updateCart = async (newCart) => {
+const updateCart = async (newCart, checkCart) => {
+  for (let i of checkCart.cart) {
+    for (let k of newCart.cart) {
+      if (i.name === k.name) {
+        i.quantity += k.quantity;
+      }
+    }
+  }
   await cartUserModel.updateOne(
     {
       username: newCart.username,
     },
     {
-      cart: {
-        $inc: { quantity: newCart.quantity, totalPrice: newCart.totalPrice },
+      $set: {
+        cart: checkCart.cart,
       },
     }
   );
