@@ -40,12 +40,16 @@ export const getCart = async (req, res) => {
   }
 };
 const updateCart = async (newCart, checkCart) => {
+  let posx = 0;
+  let posy = 0;
   for (let i of checkCart.cart) {
     for (let k of newCart.cart) {
       if (i.name === k.name) {
-        i.quantity += k.quantity;
+        checkCart.cart[posx].quantity += newCart.cart[posy].quantity;
       }
+      posy += 1;
     }
+    posx += 1;
   }
   await cartUserModel.updateOne(
     {
