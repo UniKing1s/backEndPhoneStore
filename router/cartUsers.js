@@ -3,7 +3,7 @@ import {
   createCart,
   deleteCart,
   getCart,
-  updateCart,
+  updateCartdb,
 } from "../controllers/cartUsers.js";
 
 const router = express.Router();
@@ -14,6 +14,6 @@ const router = express.Router();
 
 router.post("/", createCart);
 router.get("/:username", getCart);
-router.post("/updateCart/", updateCart);
+router.post("/updateCart/", updateCartdb);
 router.delete("/", deleteCart);
 export default router;

@@ -21,7 +21,7 @@ export const createCart = async (req, res) => {
     res.status(500).json({ error: "Tạo giỏ hàng thất bại" });
   }
 };
-export const updateCart = async (req, res) => {
+export const updateCartdb = async (req, res) => {
   try {
     const newCart = req.body;
     const checkCart = await cartUserModel.findOne({
