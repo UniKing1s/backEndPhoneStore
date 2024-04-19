@@ -39,7 +39,7 @@ export const getCart = async (req, res) => {
     // console.log(res.status);
   }
 };
-updateCart = async (newCart) => {
+const updateCart = async (newCart) => {
   await cartUserModel.updateOne(
     {
       username: newCart.username,
