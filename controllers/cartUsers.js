@@ -22,22 +22,22 @@ export const createCart = async (req, res) => {
   }
 };
 export const getCart = async (req, res) => {
-  //   try {
-  //     const username = req.params.username;
-  //     console.log(username);
-  //     const checkCart = await cartUserModel.findOne({
-  //       username: username,
-  //     });
-  //     if (checkCart) {
-  //       res.json(checkCart);
-  //     } else {
-  //       res.status(404).json({ mess: "No cart found" });
-  //     }
-  //   } catch (err) {
-  //     res.status(500).json({ error: "Lấy giỏ hàng thất bại" });
-  //     // console.log("err");
-  //     // console.log(res.status);
-  //   }
+  try {
+    const username = req.params.username;
+    console.log(username);
+    const checkCart = await cartUserModel.find({
+      username: username,
+    });
+    if (checkCart) {
+      res.json(checkCart);
+    } else {
+      res.status(404).json({ mess: "No cart found" });
+    }
+  } catch (err) {
+    res.status(500).json({ error: "Lấy giỏ hàng thất bại" });
+    // console.log("err");
+    // console.log(res.status);
+  }
 };
 const updateCart = async (cart) => {
   await cartUserModel.updateOne(
