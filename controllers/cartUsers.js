@@ -56,7 +56,7 @@ export const getCart = async (req, res) => {
     const checkCart = await cartUserModel.find({
       username: username,
     });
-    if (checkCart) {
+    if (checkCart.length > 0 && checkCart !== null) {
       res.json(checkCart);
     } else {
       res.status(404).json({ mess: "No cart found" });
@@ -73,6 +73,18 @@ export const deleteCart = async (req, res) => {
     const checkCart = await cartUserModel.deleteOne({
       username: newCart.username,
       masp: newCart.masp,
+    });
+    res.json({ mess: "success" });
+  } catch (err) {
+    res.status(500).json({ error: "xóa giỏ hàng thất bại" });
+  }
+};
+export const deleteCartAfterPayed = async (req, res) => {
+  try {
+    const newCart = req.body;
+    const checkCart = await cartUserModel.deleteMany({
+      username: newCart.username,
+      quantity: { $gt: 0 },
     });
     res.json({ mess: "success" });
   } catch (err) {

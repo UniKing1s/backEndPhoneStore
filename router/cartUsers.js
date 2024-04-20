@@ -2,6 +2,7 @@ import express from "express";
 import {
   createCart,
   deleteCart,
+  deleteCartAfterPayed,
   getCart,
   updateCartdb,
 } from "../controllers/cartUsers.js";
@@ -16,4 +17,5 @@ router.post("/", createCart);
 router.get("/:username", getCart);
 router.post("/updateCart/", updateCartdb);
 router.delete("/", deleteCart);
+router.delete("/afterPayed", deleteCartAfterPayed);
 export default router;
