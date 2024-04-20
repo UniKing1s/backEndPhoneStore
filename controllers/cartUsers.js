@@ -32,9 +32,11 @@ export const addToCart = async (req, res) => {
 
     if (checkCart) {
       updateCart(newCart);
+      res.json({ status: "done update" });
     } else {
       const cart = new cartUserModel(newCart);
       await cart.save();
+      res.json({ status: "done add" });
     }
   } catch (err) {
     res.status(500).json({ error: "Thêm vào giỏ hàng thất bại" });
@@ -123,4 +125,5 @@ const updateCart = async (cart) => {
       },
     }
   );
+  return cart;
 };
