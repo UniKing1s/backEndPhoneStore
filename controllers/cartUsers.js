@@ -102,9 +102,9 @@ export const deleteCart = async (req, res) => {
 };
 export const deleteCartAfterPayed = async (req, res) => {
   try {
-    const newCart = req.body;
+    const username = req.params.username;
     const checkCart = await cartUserModel.deleteMany({
-      username: newCart.username,
+      username: username,
       quantity: { $gt: 0 },
     });
     res.json({ mess: "success" });
