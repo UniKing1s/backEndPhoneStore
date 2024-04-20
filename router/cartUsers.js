@@ -1,5 +1,6 @@
 import express from "express";
 import {
+  addToCart,
   createCart,
   deleteCart,
   deleteCartAfterPayed,
@@ -18,4 +19,5 @@ router.get("/:username", getCart);
 router.post("/updateCart/", updateCartdb);
 router.post("/delete", deleteCart);
 router.delete("/afterPayed", deleteCartAfterPayed);
+router.post("/addToCart", addToCart);
 export default router;

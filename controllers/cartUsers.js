@@ -9,7 +9,7 @@ export const createCart = async (req, res) => {
         masp: i.masp,
       });
       if (checkCart) {
-        updateCart(i, checkCart);
+        updateCart(i);
       } else {
         const cart = new cartUserModel(i);
         await cart.save();
@@ -19,6 +19,25 @@ export const createCart = async (req, res) => {
     res.json(carts);
   } catch (err) {
     res.status(500).json({ error: "Tạo giỏ hàng thất bại" });
+  }
+};
+export const addToCart = async (req, res) => {
+  try {
+    const newCart = req.body;
+    console.log(newCart);
+    const checkCart = await cartUserModel.findOne({
+      username: newCart.username,
+      masp: newCart.masp,
+    });
+
+    if (checkCart) {
+      updateCart(newCart);
+    } else {
+      const cart = new cartUserModel(newCart);
+      await cart.save();
+    }
+  } catch (err) {
+    res.status(500).json({ error: "Thêm vào giỏ hàng thất bại" });
   }
 };
 export const updateCartdb = async (req, res) => {
